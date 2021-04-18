@@ -1,3 +1,5 @@
+import * as EmailValidator from "email-validator";
+
 import { User } from "../../model/User";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
@@ -10,7 +12,16 @@ class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   execute({ email, name }: IRequest): User {
-    // Complete aqui
+    if (!EmailValidator.validate(email)) {
+      throw new Error("Email is not valid");
+    }
+    const checkEmailExistence = this.usersRepository.findByEmail(email);
+    if (checkEmailExistence) {
+      throw new Error("User with this email already exists");
+    }
+    const user = this.usersRepository.create({ name, email });
+
+    return user;
   }
 }
 

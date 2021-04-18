@@ -4,13 +4,12 @@ import { User } from "../../../modules/users/model/User";
 
 describe("User model", () => {
   it("should be able to create an user with all props", () => {
-    const user = new User();
-
-    Object.assign(user, {
+    const user = new User({
       name: "Atlas",
       email: "atlas@fromspace.com",
       created_at: new Date(),
       updated_at: new Date(),
+      admin: false,
     });
 
     expect(user).toMatchObject({

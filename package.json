@@ -9,6 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "email-validator": "^2.0.4",
     "express": "^4.17.1",
     "uuid": "^8.3.2"
   },
